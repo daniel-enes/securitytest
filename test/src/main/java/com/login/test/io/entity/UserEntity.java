@@ -8,13 +8,11 @@ import java.io.Serializable;
 @Table(name="users")
 public class UserEntity implements Serializable {
 
-    // private static final long serialVersionUID = 5313493413859894403L;
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "userid", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private String userId;
 
     @Column(name="name", nullable = false)
@@ -23,11 +21,17 @@ public class UserEntity implements Serializable {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name= "encryptedpassword", nullable = false)
+    @Column(name="encrypted_password", nullable = false)
+    private String encryptedPassword;
+
+    @Column(name= "email_verification_token")
     private String emailVerificationToken;
 
-    @Column(name="emailverificationtoken")
+    @Column(name="email_verification_status")
     private boolean emailVerificationStatus = false;
+
+    public UserEntity() {
+    }
 
     public int getId() {
         return id;
@@ -59,6 +63,14 @@ public class UserEntity implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getEncryptedPassword() {
+        return encryptedPassword;
+    }
+
+    public void setEncryptedPassword(String encryptedPassword) {
+        this.encryptedPassword = encryptedPassword;
     }
 
     public String getEmailVerificationToken() {

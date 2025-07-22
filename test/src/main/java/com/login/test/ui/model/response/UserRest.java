@@ -6,6 +6,9 @@ public class UserRest {
     private String name;
     private String email;
 
+    public UserRest() {
+    }
+
     public String getUserId() {
         return userId;
     }

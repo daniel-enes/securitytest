@@ -19,12 +19,12 @@ USE `security` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `security`.`users` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `userid` VARCHAR(255) NOT NULL,
+  `user_id` VARCHAR(255) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
-  `encryptedPassword` VARCHAR(255) NOT NULL,
-  `emailVerificationToken` VARCHAR(255) NULL,
-  `emailVerificationStatus` BIT(1) NOT NULL,
+  `encrypted_password` VARCHAR(255) NOT NULL,
+  `email_verification_token` VARCHAR(255) NULL,
+  `email_verification_status` BIT(1) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 

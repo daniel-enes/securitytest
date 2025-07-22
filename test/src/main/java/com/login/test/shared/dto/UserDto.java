@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 public class UserDto implements Serializable {
 
-    // private static final long serialVersionUID = 6835192601898364280L;
-
     private int id;
     private String userId;
     private String name;
@@ -14,6 +12,9 @@ public class UserDto implements Serializable {
     private String encryptedPassword;
     private String emailVerificationToken;
     private boolean emailVerificationStatus = false;
+
+    public UserDto() {
+    }
 
     public int getId() {
         return id;

@@ -12,8 +12,8 @@ public class TestApplication {
 		SpringApplication.run(TestApplication.class, args);
 	}
 
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+//	@Bean
+//	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
 }

@@ -75,10 +75,15 @@ public class UserServiceImpl implements UserService {
             throw new UsernameNotFoundException("User not found with email: "+ email);
         }
 
-        return new User(
-                userEntity.getEmail(),
-                userEntity.getEncryptedPassword(),
-                new ArrayList<>()
-        );
+        // Debug output
+        System.out.println("Loaded user - email: " + userEntity.getEmail());
+        System.out.println("Encrypted password exists: " +
+                (userEntity.getEncryptedPassword() != null && !userEntity.getEncryptedPassword().isEmpty()));
+
+        // Convert to UserDto which implements UserDetails
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(userEntity, userDto);
+
+        return userDto;
     }
 }

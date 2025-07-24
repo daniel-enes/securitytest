@@ -35,7 +35,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto findByUserId(String userId) {
-        return null;
+        UserEntity userEntity = userRepository.findByUserId(userId);
+
+        if (userEntity == null) {
+            return null;
+        }
+
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(userEntity, userDto);
+        return userDto;
     }
 
     @Override
@@ -76,9 +84,9 @@ public class UserServiceImpl implements UserService {
         }
 
         // Debug output
-        System.out.println("Loaded user - email: " + userEntity.getEmail());
-        System.out.println("Encrypted password exists: " +
-                (userEntity.getEncryptedPassword() != null && !userEntity.getEncryptedPassword().isEmpty()));
+//        System.out.println("Loaded user - email: " + userEntity.getEmail());
+//        System.out.println("Encrypted password exists: " +
+//                (userEntity.getEncryptedPassword() != null && !userEntity.getEncryptedPassword().isEmpty()));
 
         // Convert to UserDto which implements UserDetails
         UserDto userDto = new UserDto();

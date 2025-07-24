@@ -10,6 +10,7 @@ import com.login.test.ui.model.response.UserRest;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -63,9 +64,23 @@ public class UserController {
         }
     }
 
-    @GetMapping(path = "/{id}")
-    public String show(@PathVariable String id) {
-        return "User called";
+    @GetMapping(path = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> show(@PathVariable String userId) {
+        try {
+            UserDto userDto = userService.findByUserId(userId);
+            if (userDto == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("User not found with ID: " + userId);
+            }
+
+            UserRest response = new UserRest();
+            BeanUtils.copyProperties(userDto, response);
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error retrieving user");
+        }
     }
 
     @PostMapping
